@@ -1,0 +1,27 @@
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+    <div class="artiste">
+        <label for="artiste">Artiste : </label>
+        <input type="text" id="artiste" formControlName="artiste">
+    </div>
+    <div class="scene">
+        <label for="scene">Scene :  </label>
+        <input type="text" id="scene" formControlName="scene">
+    </div>
+    <div class="style">
+        <label for="style">Style : </label>
+        <input type="text" id="style" formControlName="style">
+    </div>
+    <div class="date">
+        <label for="date">Date :  </label>
+        <input type="date" id="date" formControlName="date">
+    </div>
+    <div class="heure">
+        <label for="heure">Heure :  </label>
+        <input type="number" id="heure" formControlName="heure">
+    </div>
+    <div class="image">
+        <label for="image">Image :  </label>
+        <input type="text" id="image" formControlName="image">
+    </div>
+    <button class="button" type="submit">Valider</button>
+</form>

@@ -1,32 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { GraphqlService as festivalService } from '../festival.service';
+import { FestivalService } from '../festival.service';
+import { Subscription } from 'rxjs/Subscription';
+import { Router } from '@angular/router';
+import { Festival } from '../models/festival';
 
 @Component({
   selector: 'app-manage-festival',
   templateUrl: './manage-festival.component.html',
   styleUrls: ['./manage-festival.component.css']
 })
-export class ManageFestivalComponent implements OnInit {
+export class ManageFestivalComponent implements OnInit, OnDestroy {
 
-  constructor(private formBuilder: FormBuilder,
-    private festivalService: festivalService) {
+  festivals: Festival[];
+  festivalSubscription: Subscription;
+
+  constructor(
+    private festivalService: FestivalService,
+    private router: Router) {
 
   }
-
-  checkoutForm = this.formBuilder.group({
-    artiste: '',
-    scene: '',
-    style: '',
-    date: Date,
-    heure: 12,
-    image: '',
-  });
 
   ngOnInit(): void {
+    this.festivalSubscription = this.festivalService.festivalSubject.subscribe(
+      (data: Festival[]) => {
+        this.festivals = data;
+      }
+    );
+    this.festivalService.emitFestival();
+  }
+
+  onNewFestival() {
+    this.router.navigate(['/festivals', 'new'])
+  }
+
+  onDeleteFestival(festival: Festival) {
+    this.festivalService.removeFestival(festival);
+  }
+
+  onViewFestival(id: number) {
+    this.router.navigate(['/festivals', 'view', id])
+  }
+
+  ngOnDestroy(): void {
+    this.festivalSubscription.unsubscribe();
   }
   
-  onSubmit(): void {
-    console.log('formulaire envoyé', this.checkoutForm.value);
-  }
+
 }

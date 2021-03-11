@@ -37,7 +37,10 @@ export class FestivalFormComponent implements OnInit {
     const artiste = this.festivalForm.get('artiste').value;
     const scene = this.festivalForm.get('scene').value;
     const style = this.festivalForm.get('style').value;
-    const newFestival = new Festival(artiste, scene, style);
+    const newFestival = new Festival();
+    newFestival.artiste = artiste;
+    newFestival.scene = scene;
+    newFestival.style = style;
     this.festivalService.createNewFestival(newFestival);
     this.router.navigate(['/festivals']);
     console.log('formulaire envoyé', this.festivalForm.value);

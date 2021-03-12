@@ -18,7 +18,8 @@ export class FestivalFormComponent implements OnInit {
     private router: Router) { }
 
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
+    this.initForm();
   }
 
   initForm() {

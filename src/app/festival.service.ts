@@ -15,7 +15,11 @@ export class FestivalService {
   festivalSubject = new Subject<Festival[]>();
 
   constructor(private client: HttpClient) {
+    const database = firebase.default.database();
+    console.log('DATABASE', database.ref('/festivals'));
+    
     this.getFestivals();
+    
   }
 
   emitFestival() {
@@ -28,7 +32,9 @@ export class FestivalService {
 
   getFestivals() {
     firebase.default.database().ref('/festivals').on('value', ((data: any) => {
-      this.festivals = data.val() ? data.val : [];
+      this.festivals = data.val().festivals;
+      console.log('INIT', data);
+
       this.emitFestival();
     }));
   }

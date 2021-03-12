@@ -32,11 +32,15 @@
       <div class="list-group">
         <button
           class="list-group-item"
-          *ngFor="let festival of festivals; let i = index"
-          (click)="onViewFestival(i)">
+          *ngFor="let festival of festivals; let i = index">
           <h3 class="list-group-item-heading">
             {{ festival.artiste }}
-            <button class="btn btn-default pull-right" (click)="onDeleteFestival(festival)">
+              <button type="button" class="btn btn-outline-danger btn-sm" (click)="onDeleteFestival(festival)">
+                Supprimer le festival
+              <span class="glyphicon glyphicon-minus"></span>
+            </button>
+              <button type="button" class="btn btn-outline-secondary btn-sm"  (click)="onViewFestival(i)">
+                Modifier le festival
               <span class="glyphicon glyphicon-minus"></span>
             </button>
           </h3>

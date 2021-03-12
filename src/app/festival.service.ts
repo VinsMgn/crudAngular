@@ -15,9 +15,6 @@ export class FestivalService {
   festivalSubject = new Subject<Festival[]>();
 
   constructor(private client: HttpClient) {
-    const database = firebase.default.database();
-    console.log('DATABASE', database.ref('/festivals'));
-    
     this.getFestivals();
     
   }
@@ -31,17 +28,15 @@ export class FestivalService {
   }
 
   getFestivals() {
-    firebase.default.database().ref('/festivals').on('value', ((data: any) => {
-      this.festivals = data.val().festivals;
-      console.log('INIT', data);
-
+    firebase.default.database().ref('/festivals').on('value', ((data) => {
+      this.festivals = data.val();      
       this.emitFestival();
     }));
   }
 
   getOneFestival(id: number) {
     return new Promise((resolve, reject) => {
-      firebase.default.database().ref('/festivals/' + id).once('value').then((data: any) => {
+      firebase.default.database().ref('/festivals/' + id).once('value').then((data) => {
         resolve(data.val());
       }).catch((error: any) => {
         reject(error);
@@ -50,6 +45,7 @@ export class FestivalService {
   }
 
   createNewFestival(newFestival: Festival) {
+    // this.festivals = []; // A décommenter au tout début pour créer le premier élément (sinon le créer depuis la DB)
     this.festivals.push(newFestival);
     this.saveFestivals();
     this.emitFestival();

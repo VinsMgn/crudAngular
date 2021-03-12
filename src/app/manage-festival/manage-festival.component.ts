@@ -31,7 +31,7 @@ export class ManageFestivalComponent implements OnInit, OnDestroy {
   }
 
   onNewFestival() {
-    this.router.navigate(['/festivals', 'new'])
+    this.router.navigate(['festivals', 'new'])
   }
 
   onDeleteFestival(festival: Festival) {
@@ -39,7 +39,7 @@ export class ManageFestivalComponent implements OnInit, OnDestroy {
   }
 
   onViewFestival(id: number) {
-    this.router.navigate(['/festivals', 'view', id])
+    this.router.navigate(['festivals', 'view', id]);
   }
 
   ngOnDestroy(): void {

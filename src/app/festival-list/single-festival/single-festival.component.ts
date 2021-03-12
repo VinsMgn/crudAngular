@@ -16,7 +16,7 @@ export class SingleFestivalComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private festivalService: FestivalService, private router: Router ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {   
     this.festival = new Festival();
     const id = this.route.snapshot.params['id'];
     this.festivalService.getOneFestival(+id).then(

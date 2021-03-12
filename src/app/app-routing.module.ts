@@ -7,12 +7,17 @@ import { SingleFestivalComponent } from './festival-list/single-festival/single-
 import { ManageFestivalComponent } from './manage-festival/manage-festival.component';
 import { AuthGuardService } from './services/auth-guard.service';
 
-  const routes: Routes = [
+const routes: Routes = [
   { path: 'auth/signup', component: SignupComponent },
   { path: 'auth/signin', component: SigninComponent },
-  { path: 'festivals', component: ManageFestivalComponent, canActivate: [AuthGuardService], },
-  { path: 'festivals/new', component: FestivalFormComponent, canActivate: [AuthGuardService], },
+  { path: 'festivals', component: ManageFestivalComponent, canActivate: [AuthGuardService] },
   { path: 'festivals/view:id', component: SingleFestivalComponent, canActivate: [AuthGuardService], },
+  { path: 'festivals/new', component: FestivalFormComponent, canActivate: [AuthGuardService], },
+  {
+    path: '',
+    component: ManageFestivalComponent,
+    canActivate: [AuthGuardService]
+  },
 ];
 
 @NgModule({
